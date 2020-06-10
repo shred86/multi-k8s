@@ -1,3 +1,4 @@
+sudo: required
 services:
   - docker
 env:
@@ -15,6 +16,7 @@ before_install:
   - gcloud container clusters get-credentials multi-cluster
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t shred86/react-test -f ./client/Dockerfile.dev ./client
+
 script:
   - docker run -e CI=true shred86/react-test npm run test
 
